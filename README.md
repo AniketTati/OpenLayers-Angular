@@ -13,7 +13,7 @@ This is the latest one . The other package with name openlayers is discontinued.
 USAGE WARNING :-
 While importing elements of Openlayers in Angular
 
-IMPORT DELECRATIONS as
+IMPORT ELEMENT as
 import Map from 'ol/Map';
 
 Whereas IMPORT FUNCTIONS as
