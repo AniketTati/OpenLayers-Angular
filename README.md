@@ -1,5 +1,5 @@
 # OpenLayers
-This Project Shocases some basic implemetation of Openlayer Functionality in 
+This Project Showcases some basic implemetation of Openlayer Functionality in 
 Angular version 6.2.1.
 
 The 'MAP' component initialises a Map and renders it in HTML.
