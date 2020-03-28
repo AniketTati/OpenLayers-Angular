@@ -1,4 +1,10 @@
 .map {
-    width: 100%;
+    width: 70vw;
     height: 70vh;
+    margin-left: 20px;
+  }
+
+  /* position the rotate control lower than usual */
+  .ol-rotate {
+    top: 3em;
   }

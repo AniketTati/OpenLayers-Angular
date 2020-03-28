@@ -4,8 +4,7 @@ Angular version 6.2.1.
 
 The 'MAP' component initialises a Map and renders it in HTML.
 
-Installing Openlayers :-
-
+# Installing Openlayers :-
 npm install ol --save 
 
 This is the latest one . The other package with name openlayers is discontinued.
@@ -13,14 +12,23 @@ This is the latest one . The other package with name openlayers is discontinued.
 USAGE WARNING :-
 While importing elements of Openlayers in Angular
 
-IMPORT ELEMENT as
+# IMPORT ELEMENT as
 import Map from 'ol/Map';
 
-Whereas IMPORT FUNCTIONS as
+# Whereas IMPORT FUNCTIONS as
 import { fromLonLat } from 'ol/proj';
 
 Incase you get a WARNING while importing . You can try changing and check.
 Else you can View the Sourec Code to see what the element is
+
+Also import the CSS associated with openlayers in styles.scss with the project.
+# NOTE: A lot of features wont work if you fail to do this.
+@import '../node_modules/ol/ol.css';
+
+
+
+
+--------------------------------------------------------------------------------------------------------------
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.

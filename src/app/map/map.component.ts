@@ -1,11 +1,11 @@
 import { Component , AfterViewInit } from '@angular/core';
-import { defaults as defaultControls } from 'ol/control';
+import { defaults as defaultControls , ZoomToExtent} from 'ol/control';
+import { defaults as defaultInteractions, DragRotateAndZoom } from 'ol/interaction';
 
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
-import ZoomToExtent from 'ol/control/ZoomToExtent';
 import layerVector from 'ol/layer/Vector';
 import sourceVector from 'ol/source/Vector';
 import geomPoint from 'ol/geom/Point';
@@ -13,6 +13,7 @@ import geomPoint from 'ol/geom/Point';
 // Import Functions in Curly brackets
 import { Feature } from 'ol'
 import { fromLonLat } from 'ol/proj';
+
 
 @Component({
   selector: 'app-map',
@@ -26,8 +27,14 @@ export class MapComponent implements AfterViewInit  {
   map: Map;
 
   ngAfterViewInit() {
+    // Init MAP
     this.map = new Map({
+      // Add ZOOM DRAG ROTATE
+      interactions: defaultInteractions().extend([
+        new DragRotateAndZoom()
+      ]),
       target: 'map',
+      // ADD TILE LAYER
       layers: [
         new TileLayer({
           source: new XYZ({
@@ -37,8 +44,10 @@ export class MapComponent implements AfterViewInit  {
       ],
       view: new View({
         center: fromLonLat([4.35247, 50.84673]),
+        rotation: -Math.PI / 8,
         zoom: 7
       }),
+      // Button to ser Extent
       controls: defaultControls().extend([
         new ZoomToExtent({
           extent: [
@@ -49,6 +58,7 @@ export class MapComponent implements AfterViewInit  {
       ])
     });
 
+    // Add a vector later with a point marker
     var layer = new layerVector({
         source: new sourceVector({
             features: [
