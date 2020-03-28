@@ -22,8 +22,10 @@ import Feature from 'ol/Feature';
   styleUrls: ['./map3.component.scss']
 })
 export class Map3Component implements OnInit {
-  
+
   map;
+  highlight: any;
+  featureOverlay: VectorLayer;
 
   constructor() { }
 
@@ -32,7 +34,8 @@ export class Map3Component implements OnInit {
   }
 
   initilizeMap() {
-
+    
+    // Define Style
     var style = new Style({
       fill: new Fill({
         color: 'rgba(255, 255, 255, 0.6)'
@@ -52,7 +55,8 @@ export class Map3Component implements OnInit {
         })
       })
     });
-
+    
+    // Create a Vector Layer
     var vectorLayer = new VectorLayer({
       source: new VectorSource({
         url: '../../assets/pipe1.geojson',
@@ -63,7 +67,8 @@ export class Map3Component implements OnInit {
         return style;
       }
     });
-
+    
+    // Create the MAP
     this.map = new Map({
       interactions: defaultInteractions().extend([
         new DragRotateAndZoom()
@@ -78,9 +83,8 @@ export class Map3Component implements OnInit {
         vectorLayer
       ],
       view: new View({
-        center: fromLonLat([4.35247, 50.84673]),
-        rotation: -Math.PI / 8,
-        zoom: 7
+        center: fromLonLat([79.356796, 14.805284]),
+        zoom: 12
       }),
       controls: defaultControls().extend([
         new ZoomToExtent({
@@ -92,5 +96,90 @@ export class Map3Component implements OnInit {
       ])
     });
 
+    
+       
   }
+
+  // Event when clicked on MAP
+  clickMap(e) {
+    // The map requires the pixel coordinates of the mouse event
+    // I packeged it in an array and procided it
+    var pixel = [ e.layerX , e.layerY ];
+    this.displayFeatureInfo(pixel);
+  }
+  
+  // Event when mouse moves on MAP
+  moveMap(e) {
+    // The map requires the pixel coordinates of the mouse event
+    // I packeged it in an array and procided it
+    var pixel = [ e.layerX , e.layerY ];
+    this.displayFeatureInfo(pixel);
+  }
+  
+   
+
+  displayFeatureInfo(pixel) {
+
+    var feature = this.map.forEachFeatureAtPixel(pixel, function(feature) {
+          return feature;
+        });
+    
+    var info = document.getElementById('info');
+
+    if (feature) {
+      info.innerHTML = 'PIPE NAME' + ': ' + feature.get('LABEL');
+    } else {
+      info.innerHTML = '&nbsp;';
+    }
+    
+    // Highlight Stylinh
+    var highlightStyle = new Style({
+      stroke: new Stroke({
+        color: '#f00',
+        width: 5
+      }),
+      fill: new Fill({
+        color: 'rgba(255,0,0,0.1)'
+      }),
+      text: new Text({
+        font: '20px Calibri,sans-serif',
+        fill: new Fill({
+          color: 'rgba(255,255,255)'
+        }),
+        stroke: new Stroke({
+          color: '#f00',
+          width: 3
+        })
+      })
+    });
+    
+    // Create a new layer once we get a feature | create only once
+    if(!this.featureOverlay && feature){
+        this.featureOverlay = new VectorLayer({
+        source: new VectorSource(),
+        map: this.map,
+        style: function(feature) {
+          highlightStyle.getText().setText(feature.get('LABEL'));
+          return highlightStyle;
+        }
+      });
+    }
+    
+
+    console.log("featureOverlay",this.featureOverlay);
+
+    if (feature !== this.highlight) {
+      if (this.highlight) {
+        this.featureOverlay.getSource().removeFeature(this.highlight);
+      }
+      if (feature) {
+        this.featureOverlay.getSource().addFeature(feature);
+      }
+      this.highlight = feature;
+    }
+
+    console.log("after",this.highlight);
+    
+  }
+
 }
