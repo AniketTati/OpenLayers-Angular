@@ -1,0 +1,3 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[325842.3881607906,1639532.348904676]},"properties":{"DIAMETER":3.05,"BASEELEV":161.16,"INIT_ELEV":161.17,"MAX_ELEV":164.16,"MINELEV":161.16,"NETOUTQ":2420.7683,"HGL":161.17,"ID":30,"LABEL":"T-1","VI":0,"ZONEID":0,"ZONE":""}}
+]}

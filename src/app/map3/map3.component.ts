@@ -17,11 +17,11 @@ import { fromLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
 
 @Component({
-  selector: 'app-map2',
-  templateUrl: './map2.component.html',
-  styleUrls: ['./map2.component.scss']
+  selector: 'app-map3',
+  templateUrl: './map3.component.html',
+  styleUrls: ['./map3.component.scss']
 })
-export class Map2Component implements OnInit {
+export class Map3Component implements OnInit {
   
   map;
 
@@ -93,5 +93,4 @@ export class Map2Component implements OnInit {
     });
 
   }
-
 }
