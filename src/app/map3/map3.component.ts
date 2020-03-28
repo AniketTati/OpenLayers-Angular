@@ -42,7 +42,7 @@ export class Map3Component implements OnInit {
       }),
       stroke: new Stroke({
         color: '#319FD3',
-        width: 1
+        width: 3
       }),
       text: new Text({
         font: '12px Calibri,sans-serif',

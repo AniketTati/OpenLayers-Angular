@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { Map2Component } from './map2/map2.component';
 import { Map3Component } from './map3/map3.component';
 
+import { MatButtonModule } from '@angular/material/button'; 
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { Map3Component } from './map3/map3.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
